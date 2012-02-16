@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component xmlns="http://www.eclipse.org/wb/WBPComponent">
+		<description>CustomPanel that adjusts range dynamically</description>
+	<!-- CREATION -->
+	<creation>
+		<source><![CDATA[new com.masteriti.manager.client.ui.ShowMorePagerPanel()]]></source>
+	</creation>
+	<parameters>
+		<parameter name=""
+	</parameters>
+	
+</component>

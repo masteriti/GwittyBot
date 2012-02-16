@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='manager'>
+
+  <!-- Inherit the core Web Toolkit stuff.                            -->
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.google.gwt.editor.Editor' />
+  <inherits name='com.google.gwt.activity.Activity' />
+  <inherits name='com.google.gwt.place.Place' />
+<!--   <inherits name='com.google.gwt.logging.Logging'/> -->
+
+
+  <!-- You can change the theme of your GWT application by            -->
+  <!-- commenting out any one of the following lines.                   -->
+  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard'/> -->
+  <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/>     -->
+  <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>         -->
+
+  <!-- Other module inherits                                          -->
+  <inherits name='com.google.web.bindery.requestfactory.RequestFactory'/>
+  <inherits name='com.googlecode.objectify.Objectify'/>
+  
+  <!-- Use ClientFactoryImpl by default -->
+  <replace-with class="com.masteriti.manager.client.ClientFactoryImpl">
+    <when-type-is class="com.masteriti.manager.client.ClientFactory"/>
+  </replace-with>
+  
+  <!-- Specify the app entry point class.                             -->
+  <entry-point class='com.masteriti.manager.client.Manager'/>
+
+  <!-- Specify the paths for translatable code                        -->
+  <source path='client'/>
+  <source path='shared'/>
+</module>

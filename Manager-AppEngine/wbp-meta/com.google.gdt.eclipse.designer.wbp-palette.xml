@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<palette>
+	<category id="someUniqueId" name="Custom category" description="Category added for project Manager-AppEngine" open="true">
+		<component class="com.masteriti.manager.client.ui.ShowMorePagerPanel" name="ShowMorePagerPanel" description="Automatically Pages CellLists by scrolling."/>
+	</category>
+</palette>
