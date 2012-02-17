@@ -1,5 +1,8 @@
 package com.masteriti.manager.client.activities;
 
+import java.text.Collator;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -75,8 +78,23 @@ public class ListPersonActivity extends BaseActivity implements ListPersonView.P
 				@Override
 				public void onSuccess(List<PersonProxy> response) {
 					
+					Collections.sort(response, new Comparator<PersonProxy>() {
+
+						@Override
+						public int compare(PersonProxy arg0, PersonProxy arg1) {
+							// Sort by Last Name string.
+							// TODO sort by combination of last and first name.
+							Collator myCollator = Collator.getInstance();
+							String string1, string2;
+							string1 = arg0.getNameLast()+arg0.getNameFirst();
+							string2 = arg1.getNameLast()+arg1.getNameFirst();
+							return myCollator.compare(string1, string2);
+						}
+						
+					});
 					updateRowCount(response.size(), true);
 					updateRowData(0, response);
+					
 				}
 			});
 		}

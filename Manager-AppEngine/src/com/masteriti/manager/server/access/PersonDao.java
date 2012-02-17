@@ -26,7 +26,8 @@ public class PersonDao extends ObjectifyDao<Person> {
 	
 	public void delete(Person person)
 	{
-		ofy().delete(person);
+		person.setInactive();
+		this.save(person);
 	}
 	
 }

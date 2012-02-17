@@ -97,7 +97,7 @@ public class ObjectifyDao<T> extends DAOBase {
 	
 	public List<T> listAll()
 	{
-		Query<T> q = ofy().query(clazz);
+		Query<T> q = ofy().query(clazz).filter("active", true);
 		return q.list();
 	}
 	
@@ -128,7 +128,7 @@ public class ObjectifyDao<T> extends DAOBase {
 	
 	public List<T> listByProperty(String propName, Object propValue)
 	{
-		Query<T> q = ofy().query(clazz);
+		Query<T> q = ofy().query(clazz).filter("active", true);
 		q.filter(propName, propValue);
 		return q.list();
 	}
@@ -174,17 +174,17 @@ public class ObjectifyDao<T> extends DAOBase {
 	
 	public List<T> listChildren(Object parent)
 	{
-		return ofy().query(clazz).ancestor(parent).list();
+		return ofy().query(clazz).filter("active", true).ancestor(parent).list();
 	}
 	
 	public List<Key<T>> listChildrenKeys(Object parent)
 	{
-		return ofy().query(clazz).ancestor(parent).listKeys();
+		return ofy().query(clazz).filter("active", true).ancestor(parent).listKeys();
 	}
 
 	protected Query<T> buildQueryByExample(T exampleObj)
 	{
-		Query<T> q = ofy().query(clazz);
+		Query<T> q = ofy().query(clazz).filter("active", true);
 		
 		// Add all non-null properties to query filter
 		for (Field field : clazz.getDeclaredFields())

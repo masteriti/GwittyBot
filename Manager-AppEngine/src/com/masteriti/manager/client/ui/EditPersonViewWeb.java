@@ -3,6 +3,7 @@ package com.masteriti.manager.client.ui;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.masteriti.manager.shared.client.ui.EditPersonView;
@@ -11,8 +12,10 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.event.dom.client.KeyPressEvent;
 
 public class EditPersonViewWeb extends Composite implements EditPersonView {
 
@@ -84,5 +87,34 @@ public class EditPersonViewWeb extends Composite implements EditPersonView {
 		// Write a status message string
 		lblStatus.setText(msg);		
 	}
-
+	
+	private void onEnterKeyPress() {
+		// make sure that user wants to save data
+		if(Window.confirm("Save this contact?")) {
+			presenter.onSave(fldFirstName.getValue(), fldLastName.getValue(), fldMainPhone.getValue());
+			clearAllFields();
+		}
+	}
+	
+	@UiHandler("fldMainPhone")
+	void onFldMainPhoneKeyPress(KeyPressEvent event) {
+		// Check if Enter was pressed
+		if(event.getCharCode() == KeyCodes.KEY_ENTER) {
+			onEnterKeyPress();
+		}
+	}
+	@UiHandler("fldLastName")
+	void onFldLastNameKeyPress(KeyPressEvent event) {
+		// Check if Enter was pressed
+		if(event.getCharCode() == KeyCodes.KEY_ENTER) {
+			onEnterKeyPress();
+		}
+	}
+	@UiHandler("fldFirstName")
+	void onFldFirstNameKeyPress(KeyPressEvent event) {
+		// Check if Enter was pressed
+		if(event.getCharCode() == KeyCodes.KEY_ENTER) {
+			onEnterKeyPress();
+		}
+	}
 }
