@@ -1,8 +1,8 @@
 package com.masteriti.manager.client.activities;
 
-import java.text.Collator;
-import java.util.Collections;
-import java.util.Comparator;
+//import java.text.Collator;
+//import java.util.Collections;
+//import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -25,7 +25,7 @@ import com.masteriti.manager.shared.proxy.PersonProxy;
 
 public class ListPersonActivity extends BaseActivity implements ListPersonView.Presenter {
 
-	private Logger log = Logger.getLogger(ListPersonActivity.class.getName());
+//	private Logger log = Logger.getLogger(ListPersonActivity.class.getName());
 	
 	private ManagerRequestFactory rf;
 	private ListPersonView view;
@@ -73,12 +73,12 @@ public class ListPersonActivity extends BaseActivity implements ListPersonView.P
 			// To retrieve relations and value types, use .with()
 			Request<List<PersonProxy>> listAllRequest = rf.personRequest().listAll();
 			// Receiver specifies return type
-			listAllRequest.fire(new Receiver<List<PersonProxy>>(){
+			listAllRequest.with("address").fire(new Receiver<List<PersonProxy>>(){
 
 				@Override
 				public void onSuccess(List<PersonProxy> response) {
 					
-					Collections.sort(response, new Comparator<PersonProxy>() {
+/*					Collections.sort(response, new Comparator<PersonProxy>() {
 
 						@Override
 						public int compare(PersonProxy arg0, PersonProxy arg1) {
@@ -91,7 +91,7 @@ public class ListPersonActivity extends BaseActivity implements ListPersonView.P
 							return myCollator.compare(string1, string2);
 						}
 						
-					});
+					});*/
 					updateRowCount(response.size(), true);
 					updateRowData(0, response);
 					

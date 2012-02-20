@@ -1,5 +1,7 @@
 package com.masteriti.manager.server.domain;
 
+
+import javax.persistence.Embedded;
 import com.googlecode.objectify.annotation.Entity;
 
 
@@ -11,11 +13,11 @@ public class Person extends DatastoreObject {
 	private String phoneMain;
 	private String phoneAlt;
 	private String email;
+	@Embedded private Address address;
 	
 	/**
 	 * Getters and Setters
 	 */
-	
 	public String getNameFirst() {
 		return nameFirst;
 	}
@@ -30,6 +32,9 @@ public class Person extends DatastoreObject {
 	}
 	public String getEmail() {
 		return email;
+	}
+	public Address getAddress(){
+		return address;
 	}
 	public void setNameFirst(String nameFirst) {
 		this.nameFirst = nameFirst;
@@ -46,8 +51,11 @@ public class Person extends DatastoreObject {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
-
+	public void setAddress(Address address) {
+		if(this.address == null) {
+			this.address = new Address(address);
+		} else {
+			this.address = address;
+		}
+	}
 }

@@ -21,7 +21,8 @@ public interface EditPersonView extends IsWidget {
 		
 		void onSave(String firstName,
 					String lastName,
-					String mainPhone);
+					String mainPhone,
+					String city);
 	}
 
 

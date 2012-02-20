@@ -57,6 +57,19 @@ public class ListPersonViewWeb extends Composite implements ListPersonView{
 			sb.appendHtmlConstant("<td style='font-size:95%;'>");
 			sb.appendEscaped(value.getNameFirst()+" "+value.getNameLast());
 			sb.appendHtmlConstant("</td></tr><tr><td>");
+			String data = value.getAddress().getCity();
+			if(data == null) {
+				data = "NoAddress";
+			}
+/*			try{
+				data = value.getAddress().getCity();
+			} catch(NullPointerException e){
+				
+				data = "NoAddress";
+
+			}*/
+			sb.appendEscaped(data);
+			sb.appendHtmlConstant("</td></tr><tr><td>");
 			sb.appendEscaped(value.getPhoneMain());
 			sb.appendHtmlConstant("</td></tr></table>");
 		}

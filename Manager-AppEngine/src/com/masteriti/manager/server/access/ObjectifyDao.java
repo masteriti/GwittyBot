@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 import javax.persistence.Embedded;
 import javax.persistence.Transient;
@@ -18,7 +18,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 import com.googlecode.objectify.util.DAOBase;
-import com.masteriti.manager.server.domain.Message;
+//import com.masteriti.manager.server.domain.Message;
 import com.masteriti.manager.server.domain.Person;
 import com.masteriti.manager.shared.client.TooManyResultsException;
 
@@ -31,7 +31,7 @@ import com.masteriti.manager.shared.client.TooManyResultsException;
  */
 public class ObjectifyDao<T> extends DAOBase {
 	
-	private static final Logger log = Logger.getLogger(Message.class.getName());
+//	private static final Logger log = Logger.getLogger(Message.class.getName());
 	static final int BAD_MODIFIERS = Modifier.FINAL | Modifier.STATIC | Modifier.TRANSIENT;
 	
 	static

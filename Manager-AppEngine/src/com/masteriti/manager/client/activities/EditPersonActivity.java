@@ -1,7 +1,7 @@
 package com.masteriti.manager.client.activities;
 
 import java.util.Set;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 import javax.validation.ConstraintViolation;
 
@@ -11,9 +11,8 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.EntityProxyId;
 import com.google.web.bindery.requestfactory.shared.Receiver;
-import com.google.web.bindery.requestfactory.shared.Request;
+//import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
-import com.google.web.bindery.requestfactory.shared.Violation;
 import com.masteriti.manager.client.ClientFactory;
 import com.masteriti.manager.client.places.AddPersonPlace;
 import com.masteriti.manager.client.places.EditPersonPlace;
@@ -21,13 +20,14 @@ import com.masteriti.manager.client.places.ListPersonPlace;
 import com.masteriti.manager.shared.client.ManagerRequestFactory;
 import com.masteriti.manager.shared.client.PersonRequest;
 import com.masteriti.manager.shared.client.ui.EditPersonView;
+import com.masteriti.manager.shared.proxy.AddressProxy;
 import com.masteriti.manager.shared.proxy.PersonProxy;
 
 public class EditPersonActivity extends BaseActivity implements EditPersonView.Presenter {
 
-	private Logger log = Logger.getLogger(EditPersonActivity.class.getName());
+//	private Logger log = Logger.getLogger(EditPersonActivity.class.getName());
 	
-	private EventBus eventBus;
+//	private EventBus eventBus;
 	private ManagerRequestFactory rf;
 	private EditPersonView view;
 	private PlaceController placeController;
@@ -49,7 +49,7 @@ public class EditPersonActivity extends BaseActivity implements EditPersonView.P
 		EntityProxyId<PersonProxy> proxyId = rf.getProxyId(proxyToken);
 
 		// get the PersonProxy with that ID
-		rf.personRequest().find(proxyId).fire(new Receiver<PersonProxy>() {
+		rf.personRequest().find(proxyId).with("address").fire(new Receiver<PersonProxy>() {
 
 			@Override
 			public void onFailure(ServerFailure error) {
@@ -98,7 +98,7 @@ public class EditPersonActivity extends BaseActivity implements EditPersonView.P
 	@Override
 	public void start(AcceptsOneWidget panel, EventBus eventBus) {
 		
-		this.eventBus = eventBus;
+//		this.eventBus = eventBus;
 		panel.setWidget(view);
 
 	}
@@ -114,20 +114,29 @@ public class EditPersonActivity extends BaseActivity implements EditPersonView.P
 		placeController.goTo(place);
 	}
 
+	/**
+	 * on Save will persist the Person entity to the datastore.  Since the
+	 * same form is used for adding new entities as well as editing current ones,
+	 * distinguish which version of onSave to use by the Place this view is called
+	 * from.
+	 */
 	@Override
 	public void onSave(String firstName, String lastName,
-			String mainPhone) {
+						String mainPhone, String city) {
 
 		if(place instanceof AddPersonPlace) {
 			// Simply create a new entity if we're adding
 			PersonRequest req = rf.personRequest();
+			AddressProxy address = req.create(AddressProxy.class);
+			address.setCity(city);
 			PersonProxy person = req.create(PersonProxy.class);
 			person.setNameFirst(firstName);
 			person.setNameLast(lastName);
 			person.setPhoneMain(mainPhone);
-	//		person.setPhoneAlt(altPhone);
-	//		person.setEmail(email);
-			req.save(person).fire();
+			person.setAddress(address);
+			
+			req.save(person).with("address").fire();
+			
 		} else if (place instanceof EditPersonPlace) {
 			// Request an editable version of editPerson
 			PersonRequest request = rf.personRequest();
@@ -135,7 +144,16 @@ public class EditPersonActivity extends BaseActivity implements EditPersonView.P
 			this.editPerson.setNameFirst(firstName);
 			this.editPerson.setNameLast(lastName);
 			this.editPerson.setPhoneMain(mainPhone);
-			request.save(editPerson).fire(new Receiver<Void>() {
+
+			// Value types cannot be edited, so create a new address (optionally
+			// populate it by copying the original's fields) and set it as a
+			// new address.
+			AddressProxy newAddress = request.create(AddressProxy.class);
+			newAddress.setCity(city);
+			this.editPerson.setAddress(newAddress);
+			
+			// Remember to includ .with
+			request.save(editPerson).with("address").fire(new Receiver<Void>() {
 
 				@Override
 				public void onSuccess(Void response) {

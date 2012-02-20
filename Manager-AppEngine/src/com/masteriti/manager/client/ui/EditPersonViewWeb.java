@@ -27,6 +27,7 @@ public class EditPersonViewWeb extends Composite implements EditPersonView {
 	@UiField TextBox fldFirstName;
 	@UiField TextBox fldLastName;
 	@UiField TextBox fldMainPhone;
+	@UiField TextBox fldCity;
 	@UiField Label lblStatus;
 	
 	Presenter presenter;
@@ -54,7 +55,11 @@ public class EditPersonViewWeb extends Composite implements EditPersonView {
 		// Set the field values based on editPerson properties
 		fldFirstName.setValue(editPerson.getNameFirst());
 		fldLastName.setValue(editPerson.getNameLast());
-		fldMainPhone.setValue(editPerson.getPhoneMain());		
+		fldMainPhone.setValue(editPerson.getPhoneMain());
+		if(editPerson.getAddress() == null) {return;}
+		else {
+		fldCity.setValue(editPerson.getAddress().getCity());
+		}
 	}	
 
 	@UiHandler("btnClear")
@@ -64,7 +69,7 @@ public class EditPersonViewWeb extends Composite implements EditPersonView {
 	}	@UiHandler("btnSave")
 	void onBtnSaveClick(ClickEvent event) {
 		// Save the data in the fields to persist a new entity
-		presenter.onSave(fldFirstName.getValue(), fldLastName.getValue(), fldMainPhone.getValue());
+		presenter.onSave(fldFirstName.getValue(), fldLastName.getValue(), fldMainPhone.getValue(), fldCity.getValue());
 		clearAllFields();
 	}
 
@@ -79,6 +84,7 @@ public class EditPersonViewWeb extends Composite implements EditPersonView {
 		fldFirstName.setValue("");
 		fldLastName.setValue("");
 		fldMainPhone.setValue("");
+		fldCity.setValue("");
 
 	}
 
@@ -91,7 +97,7 @@ public class EditPersonViewWeb extends Composite implements EditPersonView {
 	private void onEnterKeyPress() {
 		// make sure that user wants to save data
 		if(Window.confirm("Save this contact?")) {
-			presenter.onSave(fldFirstName.getValue(), fldLastName.getValue(), fldMainPhone.getValue());
+			presenter.onSave(fldFirstName.getValue(), fldLastName.getValue(), fldMainPhone.getValue(), fldCity.getValue());
 			clearAllFields();
 		}
 	}

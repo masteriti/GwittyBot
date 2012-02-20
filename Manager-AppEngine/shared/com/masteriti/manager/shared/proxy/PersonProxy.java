@@ -18,6 +18,8 @@ public interface PersonProxy extends EntityProxy {
 	
 	String getEmail();
 	
+	AddressProxy getAddress();
+	
 	void setNameFirst(String firstname);
 	
 	void setNameLast(String lastname);
@@ -27,4 +29,6 @@ public interface PersonProxy extends EntityProxy {
 	void setPhoneAlt(String phone);
 	
 	void setEmail(String email);
+	
+	void setAddress(AddressProxy address);
 }
