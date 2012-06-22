@@ -17,8 +17,8 @@ package com.masteriti.manager;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
-import com.masteriti.manager.client.MyRequestFactory;
-import com.masteriti.manager.client.MyRequestFactory.HelloWorldRequest;
+import com.masteriti.manager.shared.client.ManagerRequestFactory;
+import com.masteriti.manager.shared.client.ManagerRequestFactory.HelloWorldRequest;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -131,7 +131,8 @@ public class ManagerActivity extends Activity {
         final TextView helloWorld = (TextView) findViewById(R.id.hello_world);
         final Button sayHelloButton = (Button) findViewById(R.id.say_hello);
         sayHelloButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
+            @Override
+			public void onClick(View v) {
                 sayHelloButton.setEnabled(false);
                 helloWorld.setText(R.string.contacting_server);
 
@@ -141,8 +142,8 @@ public class ManagerActivity extends Activity {
 
                     @Override
                     protected String doInBackground(Void... arg0) {
-                        MyRequestFactory requestFactory = Util.getRequestFactory(mContext,
-                                MyRequestFactory.class);
+                        ManagerRequestFactory requestFactory = Util.getRequestFactory(mContext,
+                                ManagerRequestFactory.class);
                         final HelloWorldRequest request = requestFactory.helloWorldRequest();
                         Log.i(TAG, "Sending request to server");
                         request.getMessage().fire(new Receiver<String>() {

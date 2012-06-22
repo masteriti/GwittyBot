@@ -67,4 +67,10 @@
     <!-- Notification message [CHAR LIMIT=NONE] -->
     <string name="unregistration_succeeded">Unegistered %1$s for C2DM messaging.</string>
 
+    <!-- Contact View Title -->
+    <string name="contactViewTitle">Contact</string>
+    <string name="contactNameTitle">Name</string>
+    <string name="contactAddressTitle">Address</string>
+    <string name="contactPhoneTitle">Phone</string>
+    <string name="contactButtonAdd">Add Contact</string>
 </resources>

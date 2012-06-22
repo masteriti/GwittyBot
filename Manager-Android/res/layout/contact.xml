@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/contactLinearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/idContactViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/contactViewTitle"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/idContactName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contactNameTitle" />
+
+        <EditText
+            android:id="@+id/editNameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contactAddressTitle" />
+        
+        <EditText
+            android:id="@+id/editAddressText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress" />
+
+        <TextView
+            android:id="@+id/contactTextView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contactPhoneTitle" />
+        
+        <EditText
+            android:id="@+id/editPhoneText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone" />
+
+        <Button
+            android:id="@+id/buttonAddContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contactButtonAdd" />
+
+    </LinearLayout>

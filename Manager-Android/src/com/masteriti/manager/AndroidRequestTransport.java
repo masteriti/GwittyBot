@@ -51,7 +51,8 @@ public class AndroidRequestTransport implements RequestTransport {
         this.cookie = cookie;
     }
 
-    public void send(String payload, TransportReceiver receiver) {
+    @Override
+	public void send(String payload, TransportReceiver receiver) {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost();
         post.setHeader("Content-Type", "application/json;charset=UTF-8");

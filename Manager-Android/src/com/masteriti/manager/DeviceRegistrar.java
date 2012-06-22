@@ -18,10 +18,6 @@ import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
 
-import com.masteriti.manager.client.ManagerRequestFactory;
-import com.masteriti.manager.client.ManagerRequestFactory.RegistrationInfoRequest;
-import com.masteriti.manager.shared.RegistrationInfoProxy;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

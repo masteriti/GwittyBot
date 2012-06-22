@@ -34,8 +34,6 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -129,12 +127,14 @@ public class AccountsActivity extends Activity {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
             builder.setMessage(R.string.needs_account);
             builder.setPositiveButton(R.string.add_account, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
+                @Override
+				public void onClick(DialogInterface dialog, int which) {
                     startActivity(new Intent(Settings.ACTION_ADD_ACCOUNT));
                 }
             });
             builder.setNegativeButton(R.string.skip, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
+                @Override
+				public void onClick(DialogInterface dialog, int which) {
                     finish();
                 }
             });
@@ -149,7 +149,8 @@ public class AccountsActivity extends Activity {
 
             final Button connectButton = (Button) findViewById(R.id.connect);
             connectButton.setOnClickListener(new OnClickListener() {
-                public void onClick(View v) {
+                @Override
+				public void onClick(View v) {
                     // Set "connecting" status
                     SharedPreferences prefs = Util.getSharedPreferences(mContext);
                     prefs.edit().putString(Util.CONNECTION_STATUS, Util.CONNECTING).commit();
@@ -180,7 +181,8 @@ public class AccountsActivity extends Activity {
 
         final Button disconnectButton = (Button) findViewById(R.id.disconnect);
         disconnectButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
+            @Override
+			public void onClick(View v) {
                 // Unregister
                 C2DMessaging.unregister(mContext);
                 finish();
@@ -238,13 +240,15 @@ public class AccountsActivity extends Activity {
                     // it into a cookie for the appengine server
                     final Activity activity = this;
                     mgr.getAuthToken(account, "ah", null, activity, new AccountManagerCallback<Bundle>() {
-                        public void run(AccountManagerFuture<Bundle> future) {
+                        @Override
+						public void run(AccountManagerFuture<Bundle> future) {
                             String authToken = getAuthToken(future);
                             // Ensure the token is not expired by invalidating it and
                             // obtaining a new one
                             mgr.invalidateAuthToken(account.type, authToken);
                             mgr.getAuthToken(account, "ah", null, activity, new AccountManagerCallback<Bundle>() {
-                                public void run(AccountManagerFuture<Bundle> future) {
+                                @Override
+								public void run(AccountManagerFuture<Bundle> future) {
                                     String authToken = getAuthToken(future);
                                     // Convert the token into a cookie for future use
                                     String authCookie = getAuthCookie(authToken);
