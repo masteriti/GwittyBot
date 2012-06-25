@@ -14,17 +14,29 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
-            android:id="@+id/idContactName"
+            android:id="@+id/idContactFirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/contactNameTitle" />
+            android:text="@string/contactNameFirstTitle" />
 
         <EditText
-            android:id="@+id/editNameText"
+            android:id="@+id/editNameFirstText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
 
+        <TextView
+            android:id="@+id/idContactLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contactNameLastTitle" />
+
+        <EditText
+            android:id="@+id/editNameLastText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </EditText>
+        
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"

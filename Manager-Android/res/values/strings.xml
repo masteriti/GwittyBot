@@ -69,7 +69,7 @@
 
     <!-- Contact View Title -->
     <string name="contactViewTitle">Contact</string>
-    <string name="contactNameTitle">Name</string>
+    <string name="contactNameFirstTitle">First Name</string><string name="contactNameLastTitle">Last Name</string>
     <string name="contactAddressTitle">Address</string>
     <string name="contactPhoneTitle">Phone</string>
     <string name="contactButtonAdd">Add Contact</string>

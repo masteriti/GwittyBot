@@ -17,6 +17,9 @@ package com.masteriti.manager;
 import com.google.web.bindery.requestfactory.shared.Receiver;
 import com.google.web.bindery.requestfactory.shared.Request;
 import com.google.web.bindery.requestfactory.shared.ServerFailure;
+import com.masteriti.manager.shared.client.ManagerRequestFactory;
+import com.masteriti.manager.shared.client.ManagerRequestFactory.RegistrationInfoRequest;
+import com.masteriti.manager.shared.proxy.RegistrationInfoProxy;
 
 import android.content.Context;
 import android.content.Intent;
@@ -100,7 +103,7 @@ public class DeviceRegistrar {
     }
 
     private static RegistrationInfoRequest getRequest(Context context) {
-        MyRequestFactory requestFactory = Util.getRequestFactory(context, MyRequestFactory.class);
+        ManagerRequestFactory requestFactory = Util.getRequestFactory(context, ManagerRequestFactory.class);
         RegistrationInfoRequest request = requestFactory.registrationInfoRequest();
         return request;
     }
